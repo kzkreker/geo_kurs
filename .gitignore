@@ -1,0 +1,7 @@
+*~
+*.swp
+.idea
+.nide
+node_modules
+*.log
+projectFilesBackup
