@@ -12,6 +12,7 @@ var routes = new Object();
 routes['index'] = require('./routes/index');
 routes['user']  = require('./routes/user');
 routes['api']   = require('./routes/api');
+routes['menuget']   = require('./routes/menuget.js');
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.get('/', routes.index.index);
 app.get('/users', routes.user.list);
 app.get('/api/markers', routes.api.markers);
 app.get('/api/markers/:id', routes.api.markerInfo);
+app.get('/api/menu/', routes.menuget.markerInfo);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));

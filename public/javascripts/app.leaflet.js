@@ -18,25 +18,17 @@ function initLeafletMap(lat, long) {
     var osm = new L.TileLayer('/javascripts/images/tiles/{z}/{x}_{y}.png', {
 
           maxZoom: 25
-        , minZoom: 1
+        , minZoom: 15
     });
 
     // add the layer to the map, set the view to a given place and zoom
-    map.addLayer(osm).setView(new L.LatLng(lat, long), 15);
-
-    //устанавливаем границы перемещения по карте
-    //@todo необходимо перенести данные константы в файл настроек
-   // var southWest = new L.LatLng(49.83222502, 82.35420227);
-    //var northEast = new L.LatLng(50.21514028, 83.05183411);
-    //var bounds = new L.LatLngBounds(southWest, northEast);
-    //map.setMaxBounds(bounds);
+    map.addLayer(osm).setView(new L.LatLng(lat, long), 17);
 
     // создание словаря со слоями маркеров и добавление на карту оных
     markersLayerGroup = {
         patrolpoints  : new L.LayerGroup()
     }
     map.addLayer(markersLayerGroup.patrolpoints);
-
 
     // словарь со всеми маркерами, присутствующими на карте
     markers = {}
