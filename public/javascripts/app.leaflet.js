@@ -115,18 +115,48 @@ $(document).ready(function() {
     // initialize the map on the "map" div
     initLeafletMap(49.90589877, 82.61572301);
 
+    var flag=true;
+    var branchline='';
+    $.get('/api/menu/', function(records) {
 
+        for(var i=0; i<records.length-1; i++) {
 
-    var branches = $("<li><span id='root'>Список платформ:</span><ul>" +
-        "<li><span>"+'Платформа 1'+"</span><ul>" +
-        "<li><span>"+'Маршрут:'+"</span><ul>" +
-        "<li><a href='#' id='samplebutton'>1</a></li>" +
-        "<li><a href='#' id='samplebutton'>2</a></li>"+
-        "</li></ul></li></ul></li></ul></li>").appendTo("#browser");
-    $("#browser").treeview({
-        add: branches
+        if(records[i].platform==records[i+1].platform && flag!=false){
+                branchline='';
+                branchline="<li><span id='root'>Список платформ:</span><ul>" +
+                "<li><span>"+'Платформа №'+records[i].platform+"</span><ul>" +
+                "<li><span>"+'Маршруты:'+"</span><ul>";
+                flag=false;
+                console.log(branchline);
+        }
+
+        branchline=branchline+"<li><a href='#' id='samplebutton'>"+records[i].platform+"-"+records[i].track+"</a></li>";
+        console.log(branchline);
+
+        if(records[i].platform!=records[i+1].platform ){
+        branchline=branchline+"</li></ul></li></ul></li></ul></li>";
+        var branches = $(branchline).appendTo("#browser");
+
+        $("#browser").treeview({
+             add: branches
+             });
+        flag=true;
+            console.log(branchline);
+        }
+
+            if(i+1==records.length-1){
+                branchline=branchline+"<li><a href='#' id='samplebutton'>"+records[i+1].platform+"-"+records[i+1].track+"</a></li>";
+                branchline=branchline+"</li></ul></li></ul></li></ul></li>";
+                var branches = $(branchline).appendTo("#browser");
+
+                $("#browser").treeview({
+                    add: branches
+                });
+                console.log(branchline);
+            }
+
+    }
     });
-
 
     map.on('click', onMapClick);
     var popup = new L.Popup();
