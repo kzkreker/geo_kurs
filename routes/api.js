@@ -1,11 +1,10 @@
 /*
  * GET home page.
  */
+var settings = require('./settings.js');
+var pg = require('pg');
 
-var pg = require('pg'); //native libpq bindings = `var pg = require('pg').native`
-var conString = "tcp://postgres:5432@localhost/postgres";
-
-var client = new pg.Client(conString);
+var client = new pg.Client(settings.conString);
 client.connect();
 
 exports.markers = function(req, res){
@@ -13,8 +12,8 @@ exports.markers = function(req, res){
   res.send(items);
 };
 
-function getById(id, callback) {
-    var query = client.query(" SELECT * FROM public.curtrac WHERE curtrac.plid = $1",[id]);
+function getById(id,callback) {
+    var query = client.query(" SELECT  * FROM public.gpscord WHERE gpscord.track = $1 AND gpscord.platform = $1 ORDER BY gpscord.data ASC; ",[id]);
     var data = new Array();
     query.on('row', function(row) {
         data.push(row);
@@ -30,15 +29,4 @@ exports.markerInfo = function(req, res) {
     getById(req.param('id'), function(rows){
         res.send(rows);
     });
-}
-
-
-function addCoordinates(platform, longitude, latitude, datetime, track) {
-    datetime ="'"+datetime+"'";
-    str="INSERT INTO curtrac(plid, longit, latit, time_n, tracid)VALUES ("+platform+', '+longitude+', '+latitude+', '+datetime+', '+track+");";
-    console.log(str);
-
-    var query = client.query(str);
-    //disconnect client manually
-    query.on('end', client.end.bind(client));
 }

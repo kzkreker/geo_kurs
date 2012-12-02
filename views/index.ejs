@@ -2,19 +2,32 @@
 <html lang="en">
 <head>
       <meta charset="utf-8">
-      <title>Main page</title>
+      <title>Положение платформ</title>
       <link href="stylesheets/bootstrap.css" rel="stylesheet">
       <link href="stylesheets/leaflet.css" rel="stylesheet">
+
+
       <script type="text/javascript" src="/javascripts/jquery-1.8.2.min.js"></script>
+      <script type="text/javascript" src="/javascripts/app.leaflet.js"></script>
       <script type="text/javascript" src="/javascripts/bootstrap.js"></script>
       <script type="text/javascript" src="/javascripts/leaflet.js"></script>
-      <script type="text/javascript" src="/javascripts/app.leaflet.js"></script>
+      <script type="text/javascript" src="/javascripts/treeview.js"></script>
+      <script type="text/javascript" src="/javascripts/demo.js"</script>
+      <script type="text/javascript" src="/javascripts/jquery.treeview.js"</script>
+
+
+
+
       <style>
           body {}
           .left-panel {border: solid 1px #909090; border-radius: 5px;}
           #map {height: 500px;}
   		}
       </style>
+
+
+
+
 </head>
 <body class="code">
     <div class="row-fluid">
@@ -34,25 +47,35 @@
             </div>
             <div class="container-fluid">
                 <div class="row-fluid" >
-                    <div class="span2 left-panel">
-                            <ul class="nav nav-list">
-                                <li class="nav-header">Дополнительно</li>
-                                <li class=""><a href="#">Видеоархив</a></li>
-                                <li><a href="#">Справка</a></li>
-                            </ul>
 
-                    </div>
-                        <div class="span10" style="position: relative; height: 500px;" >
-                            <div id="map" class="leaflet-container leaflet-fade-anim" style="position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px;" tabindex="0"></div>
-                        </div>
-                    </div>
+                      <div class="bs-docs-grid">
+
+
+                                  <div class="row show-grid">
+                                    <div class="span2">
+
+
+                                        <ul id="browser" class="filetree">
+
+                                        </ul>
+
+                                    </div>
+
+                                   <div class="span10" style="position: relative; height: 500px;" >
+                                                               <div id="map" class="leaflet-container leaflet-fade-anim" style="position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px;" tabindex="0"></div>
+                                                               </div>
+                                   </div>
+
+                                  </div>
+
+                      </div>
                 </div>
             </div>
         </div>
     </div>
     <footer>
         <hr class="footer-hr">
-        <center>
+         <center>
             <p>© ТОО "Моя компания" 2012</p>
         </center>
     </footer>
